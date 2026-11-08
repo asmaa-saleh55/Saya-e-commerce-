@@ -1,0 +1,107 @@
+<div class="p-6 md:p-10 bg-[#faf7f2] min-h-screen">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-[1.5fr_1fr] gap-10">
+    <div>
+      <h2 class="text-3xl font-light tracking-[3px] mb-8">Checkout</h2>
+      
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        
+        <div>
+          <input formControlName="name" 
+            [ngClass]="{'border-red-600 bg-red-50': f['name'].touched && f['name'].invalid, 'border-black/10 bg-white': !(f['name'].touched && f['name'].invalid)}"
+            class="w-full border p-4 text-[13px]" placeholder="Full Name *" />
+          <div *ngIf="f['name'].touched && f['name'].invalid" class="text-red-600 text-[11px] mt-1">
+            <span *ngIf="f['name'].errors?.['required']">Name is required</span>
+            <span *ngIf="f['name'].errors?.['minlength']">Name must be at least 3 characters</span>
+          </div>
+        </div>
+
+        <div>
+          <input formControlName="phone"
+            [ngClass]="{'border-red-600 bg-red-50': f['phone'].touched && f['phone'].invalid, 'border-black/10 bg-white': !(f['phone'].touched && f['phone'].invalid)}"
+            class="w-full border p-4 text-[13px]" placeholder="Phone Number * (01xxxxxxxxx)" />
+          <div *ngIf="f['phone'].touched && f['phone'].invalid" class="text-red-600 text-[11px] mt-1">
+            <span *ngIf="f['phone'].errors?.['required']">Phone number is required</span>
+            <span *ngIf="f['phone'].errors?.['pattern']">Invalid phone number! Must be 11 digits starting with 010, 011, 012, or 015</span>
+          </div>
+        </div>
+
+        <div>
+          <input formControlName="address"
+            [ngClass]="{'border-red-600 bg-red-50': f['address'].touched && f['address'].invalid, 'border-black/10 bg-white': !(f['address'].touched && f['address'].invalid)}"
+            class="w-full border p-4 text-[13px]" placeholder="Address *" />
+          <div *ngIf="f['address'].touched && f['address'].invalid" class="text-red-600 text-[11px] mt-1">Address is required</div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <input formControlName="city" 
+              [ngClass]="{'border-red-600 bg-red-50': f['city'].touched && f['city'].invalid, 'border-black/10 bg-white': !(f['city'].touched && f['city'].invalid)}"
+              class="border p-4 text-[13px] w-full" placeholder="City" />
+            <div *ngIf="f['city'].touched && f['city'].invalid" class="text-red-600 text-[11px] mt-1">Required</div>
+          </div>
+          <div>
+            <input formControlName="governorate" 
+              [ngClass]="{'border-red-600 bg-red-50': f['governorate'].touched && f['governorate'].invalid, 'border-black/10 bg-white': !(f['governorate'].touched && f['governorate'].invalid)}"
+              class="border p-4 text-[13px] w-full" placeholder="Governorate" />
+            <div *ngIf="f['governorate'].touched && f['governorate'].invalid" class="text-red-600 text-[11px] mt-1">Required</div>
+          </div>
+        </div>
+
+        <div class="pt-6">
+          <h3 class="font-bold text-[13px] tracking-[2px] mb-4">PAYMENT METHOD</h3>
+          <label class="flex items-center gap-3 border p-4 mb-3 cursor-pointer bg-white">
+            <input type="radio" formControlName="payment" value="cod" />
+            <span class="text-[13px]">Cash on Delivery</span>
+          </label>
+          <label class="flex items-center gap-3 border p-4 cursor-pointer bg-white">
+            <input type="radio" formControlName="payment" value="card" />
+            <span class="text-[13px]">Credit Card / Paymob</span>
+          </label>
+
+          <!-- هيظهر بس لما تختاري Credit -->
+          <div *ngIf="checkoutForm.get('payment')?.value === 'card'" class="mt-4 p-5 border border-black/10 bg-white space-y-4">
+            <div>
+              <input formControlName="cardNumber" placeholder="Card Number - 16 digits" maxlength="16"
+                [ngClass]="{'border-red-600 bg-red-50': f['cardNumber'].touched && f['cardNumber'].invalid, 'border-black/10 bg-white': !(f['cardNumber'].touched && f['cardNumber'].invalid)}"
+                class="w-full border p-4 text-[13px]" />
+              <div *ngIf="f['cardNumber'].touched && f['cardNumber'].invalid" class="text-red-600 text-[11px] mt-1">Card number must be 16 digits</div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <input formControlName="cardExpiry" placeholder="MM/YY"
+                  [ngClass]="{'border-red-600 bg-red-50': f['cardExpiry'].touched && f['cardExpiry'].invalid, 'border-black/10 bg-white': !(f['cardExpiry'].touched && f['cardExpiry'].invalid)}"
+                  class="w-full border p-4 text-[13px]" />
+                <div *ngIf="f['cardExpiry'].touched && f['cardExpiry'].invalid" class="text-red-600 text-[11px] mt-1">Required</div>
+              </div>
+              <div>
+                <input formControlName="cardCvv" placeholder="CVV" maxlength="4"
+                  [ngClass]="{'border-red-600 bg-red-50': f['cardCvv'].touched && f['cardCvv'].invalid, 'border-black/10 bg-white': !(f['cardCvv'].touched && f['cardCvv'].invalid)}"
+                  class="w-full border p-4 text-[13px]" />
+                <div *ngIf="f['cardCvv'].touched && f['cardCvv'].invalid" class="text-red-600 text-[11px] mt-1">Invalid CVV</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-[#2b2222] hover:bg-black text-white py-[20px] tracking-[4px] text-[12px] mt-6">
+          PAY {{ total }} L.E
+        </button>
+      </form>
+    </div>
+
+    <!-- نزلناه لتحت بـ mt-16 -->
+    <div class="bg-white p-8 h-fit mt-16">
+      <h3 class="font-bold tracking-[2px] text-[13px] mb-6">ORDER SUMMARY</h3>
+      <div *ngFor="let item of cartItems" class="flex justify-between text-[13px] mb-3">
+        <span class="text-black/60">{{ item.name }}</span>
+        <span>{{ item.price }} L.E</span>
+      </div>
+      <div class="border-t border-black/10 my-4"></div>
+      <div class="flex justify-between font-bold text-red-600">
+        <span>Total</span>
+        <span>{{ total }} L.E</span>
+      </div>
+    </div>
+  </div>
+</div>

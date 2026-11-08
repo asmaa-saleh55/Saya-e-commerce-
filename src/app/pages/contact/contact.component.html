@@ -1,0 +1,76 @@
+<section class="min-h-screen bg-[#EDE6DA] w-full px-8 lg:px-16 py-8">
+  
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+      
+      <!-- LEFT FORM -->
+      <div class="w-full lg:w-[42%]">
+        <h2 class="font-serif text-[44px] lg:text-[54px] leading-[0.9] text-[#6B5D4D] font-light tracking-wide">CONTACT US</h2>
+        <p class="font-serif text-[18px] text-[#8A7D6E] mt-3 mb-10 font-light tracking-wide">We'd love to hear from you.</p>
+  
+        <form (ngSubmit)="submit()" class="space-y-8">
+          <div>
+            <label class="text-[12px] tracking-[0.2em] text-[#1A1A1A] block mb-2">NAME</label>
+            <div class="border-t border-[#C9BFB0] pt-3">
+              <input [(ngModel)]="form.name" name="name" type="text" placeholder="Your name" required
+                class="w-full bg-transparent text-[14px] text-[#6B5D4D] placeholder:text-[#A99D8E] placeholder:font-light focus:outline-none pl-2">
+            </div>
+            <div class="border-t border-[#C9BFB0] mt-3"></div>
+          </div>
+  
+          <div>
+            <label class="text-[12px] tracking-[0.2em] text-[#1A1A1A] block mb-2">EMAIL</label>
+            <div class="border-t border-[#C9BFB0] pt-3">
+              <input [(ngModel)]="form.email" name="email" type="email" placeholder="your@email.com" required
+                class="w-full bg-transparent text-[14px] text-[#6B5D4D] placeholder:text-[#A99D8E] placeholder:font-light focus:outline-none pl-2">
+            </div>
+            <div class="border-t border-[#C9BFB0] mt-3"></div>
+          </div>
+
+          <div>
+            <label class="text-[12px] tracking-[0.2em] text-[#1A1A1A] block mb-2">PHONE</label>
+            <div class="border-t border-[#C9BFB0] pt-3">
+              <input [(ngModel)]="form.phone" name="phone" type="number" placeholder="Your phone" required
+                class="w-full bg-transparent text-[14px] text-[#6B5D4D] placeholder:text-[#A99D8E] placeholder:font-light focus:outline-none pl-2">
+            </div>
+            <div class="border-t border-[#C9BFB0] mt-3"></div>
+          </div>
+  
+          <div>
+            <label class="text-[12px] tracking-[0.2em] text-[#1A1A1A] block mb-2">MESSAGE</label>
+            <div class="border-t border-[#C9BFB0] pt-3">
+              <textarea [(ngModel)]="form.message" name="message" rows="2" placeholder="Write your message here..." required
+                class="w-full bg-transparent text-[14px] font-serif text-[#1A1A1A] placeholder:text-[#6B5D4D] focus:outline-none resize-none"></textarea>
+            </div>
+          </div>
+  
+          <!-- Button with cut corners like image -->
+          <button type="submit"
+            class="mt-4 w-full lg:w-[85%] py-3.5 bg-[#3D2B24] text-[#EDE6DA] text-[13px] tracking-[0.2em] hover:bg-[#7A6E5D] transition-all"
+            style="clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%, 0% 12px, 12px 0%); 
+                   border-radius: 0; 
+                   clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px)">
+            SEND MESSAGE
+          </button>
+  
+          <p *ngIf="sent" class="text-[12px] text-[#6B5D4D] mt-2">✓ Message sent!</p>
+        </form>
+  
+        <!-- Bottom Info -->
+        <div class="mt-12 space-y-2 text-[11px] tracking-[0.15em] text-[#1A1A1A]">
+          <p>EMAIL — <span class="normal-case tracking-normal">sayasayastudio.com</span></p>
+          <p>PHONE — <span class="tracking-normal">+1 (212) 555-0187</span></p>
+          <p>STUDIO — NEW YORK, NY</p>
+        </div>
+      </div>
+  
+      <!-- RIGHT IMAGE -->
+      <div class="w-full lg:w-[50%] flex justify-center ">
+        <div class="w-full max-w-[480px] h-[400px] lg:h-[510px] overflow-hidden bg-[#D9D0C1]">
+            <img src="./assets/images/contact.jpg"
+               alt="Linen folded with olive branch"
+               class="w-full h-full object-cover">
+        </div>
+      </div>
+  
+    </div>
+  </section>

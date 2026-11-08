@@ -1,0 +1,70 @@
+<section class="min-h-screen w-full bg-[#EDE6DA] px-6 lg:px-[80px] py-[60px]">
+
+    <div class="flex justify-between items-end mb-[50px]">
+      <div>
+        <h1 class="font-['Instrument_Serif'] text-[54px] leading-[0.9] text-[#4A2E1F] font-light">Your Cart</h1>
+        <p class="font-['Instrument_Serif'] italic text-[20px] text-[#4A2E1F]/70 mt-2">Crafted slowly. Made to last.</p>
+      </div>
+      <p class="text-[12px] tracking-[0.2em] text-[#4A2E1F]">{{ cartItems.length }} ITEMS</p>
+    </div>
+  
+    <!-- لو فاضية -->
+    <div *ngIf="cartItems.length === 0" class="text-center py-20">
+      <p class="font-['Instrument_Serif'] text-[32px] text-[#4A2E1F]">Your cart is empty</p>
+      <a routerLink="/shop" class="inline-block mt-6 px-8 py-3 bg-[#4A2E1F] text-[#EDE6DA] text-[12px] tracking-[0.2em]">CONTINUE SHOPPING</a>
+    </div>
+  
+    <div *ngIf="cartItems.length > 0" class="flex flex-col lg:flex-row gap-12 items-start">
+  
+      <!-- Items -->
+      <div class="w-full lg:w-[60%] space-y-4">
+        <div *ngFor="let item of cartItems"
+          class="flex gap-5 bg-white/50 p-4 border border-[#C9BFB0]/50 backdrop-blur-sm">
+          
+          <img [src]="item.image" [alt]="item.name" class="w-[110px] h-[135px] object-cover bg-white">
+  
+          <div class="flex-1 flex flex-col justify-between py-1">
+            <div>
+              <h3 class="font-['Instrument_Serif'] text-[18px] text-[#1A1A1A] leading-tight">{{ item.name }}</h3>
+              <p class="text-[11px] tracking-[0.2em] text-[#4A2E1F] mt-2">SIZE: {{ item.size }}</p>
+              <p class="font-['Inter'] text-[14px] mt-2">${{ item.price }}</p>
+            </div>
+  
+            <div class="flex items-center justify-between mt-4">
+              <div class="flex items-center gap-4 border border-[#4A2E1F] px-3 py-[6px]">
+                <button (click)="decrease(item)" class="w-5 h-5 flex items-center justify-center">-</button>
+                <span class="text-[13px] min-w-[16px] text-center">{{ item.quantity }}</span>
+                <button (click)="increase(item)" class="w-5 h-5 flex items-center justify-center">+</button>
+              </div>
+              <button (click)="remove(item)" class="text-[11px] tracking-[0.15em] underline text-[#4A2E1F] hover:opacity-60">REMOVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Summary -->
+      <div class="w-full lg:w-[38%] bg-[#F8F5EF] p-8 border border-[#C9BFB0] sticky top-10">
+        <h3 class="font-['Instrument_Serif'] text-[24px] text-[#4A2E1F] mb-8">Order Summary</h3>
+  
+        <div class="space-y-4 font-['Inter'] text-[13px] tracking-wide text-[#1A1A1A]">
+          <div class="flex justify-between"><span>Subtotal</span><span>${{ total }}</span></div>
+          <div class="flex justify-between"><span>Shipping</span><span class="text-[#4A2E1F]">Free</span></div>
+          <div class="flex justify-between"><span>Tax</span><span>Calculated at checkout</span></div>
+          <div class="h-[1px] bg-[#C9BFB0]/60 my-5"></div>
+          <div class="flex justify-between font-semibold text-[16px]"><span>Total</span><span>${{ total }}</span></div>
+        </div>
+  
+        <div class="mt-6 space-y-1">
+          <p class="text-[10px] tracking-[0.15em] text-[#4A2E1F]/50">• Small-batch production</p>
+          <p class="text-[10px] tracking-[0.15em] text-[#4A2E1F]/50">• Natural dyes • Zero-waste packaging</p>
+        </div>
+  
+        <button routerLink="/checkout"
+          class="mt-8 w-full py-[14px] bg-[#4A2E1F] text-[#EDE6DA] text-[11px] tracking-[0.22em] font-medium hover:bg-[#2B1A11] transition-colors">
+          PROCEED TO CHECKOUT
+        </button>
+  
+        <a routerLink="/shop" class="block text-center mt-5 text-[11px] tracking-[0.18em] underline text-[#4A2E1F]">CONTINUE SHOPPING</a>
+      </div>
+    </div>
+  </section>
